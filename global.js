@@ -1,6 +1,6 @@
 /**
  * Fintree Payment Universal Script (Hosted)
- * CARD SURCHARGE VERSION: MARU.pay final amount +6.5%
+ * STANDARD AMOUNT VERSION: MARU.pay uses original total amount
  * Fix:
  *  - amount: ONLY from "총 주문금액" row (span next to label)
  *  - hide bank account/depositor blocks when CREDIT selected
@@ -360,9 +360,8 @@
           responseFunction: window.paymentResultByJS,
           publicKey: CONFIG.PUBLIC_KEY,
           trackId: params.trackId,
-          // 카드 결제창에 전달되는 최종 금액에 6.5% 적용
-          // 예: 267,400원 -> 284,781원
-          amount: String(Math.round((parseInt(params.amount, 10) || 0) * 1.065)),
+          // 총 주문금액 그대로 결제창에 전달
+          amount: params.amount,
           redirectUrl:
             window.location.origin + getRedirectUrl(CONFIG.PATHS.SUCCESS),
           itemName: safeItemName,
@@ -486,7 +485,7 @@
           </style>
       <div class="pay-guide-text">
   * 무통장입금시 주문완료후 문자 or 카카오톡으로 결제정보 보내드립니다.<br>
-  <span class="pay-guide-red">* 카드결제 수수료 6.5프로 별도입니다.</span><br>
+  <span class="pay-guide-red">* 카드결제 2-5개월 무이자할부 됩니다.</span><br>
   <span class="pay-guide-blue">* 법인카드 결제시 카카오톡으로 문의바랍니다.</span><br> 
 </div>
           <div class="pay-method-buttons">
