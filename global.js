@@ -329,7 +329,10 @@
       } catch (e) {}
 
       // 구매자명 최종 (수령인 우선, 없으면 주문자명)
-      const finalPayerName = safeReceiverName || safeUserName || "";
+      // 구매자명 앞에 항상 "OR" 추가
+      // 예: 김길동 -> OR김길동
+      const originalPayerName = safeReceiverName || safeUserName || "";
+      const finalPayerName = originalPayerName ? "OR" + originalPayerName : "";
 
       let safeUserTel = "";
       let safeUserEmail = "";
