@@ -481,12 +481,12 @@
             .pay-guide-text .pay-guide-blue{ color:#0066ff; font-weight:700; }
             .moved-depositor-block{ margin-top:10px; padding:10px; border:1px solid #eee; border-radius:6px; background:#fafafa; }
           </style>
-          <div class="pay-guide-text">
-            <span class="pay-guide-BLACK">* 무통장입금시 주문완료후 문자 or 카카오톡으로 결제정보 보내드립니다.</span><br>
-            <span class="pay-guide-red">* 카드결제 수수료 6.5프로 별도입니다.</span><br>
-            <span class="pay-guide-blue">* 법인카드 결제시 카카오톡으로 문의주세요.</span><br> 
-            * 카드결제 오류 시 카카오톡으로 문의해주세요.<br>
-          </div>
+      <div class="pay-guide-text">
+  <span style="color:#000000 !important; font-weight:700 !important;">* 무통장입금시 주문완료후 문자 or 카카오톡으로 결제정보 보내드립니다.</span><br>
+  <span class="pay-guide-red">* 카드결제 수수료 6.5프로 별도입니다.</span><br>
+  <span class="pay-guide-blue">* 법인카드 결제시 카카오톡으로 문의바랍니다.</span><br> 
+  * 카드결제 오류 시 카카오톡으로 문의해주세요.<br>
+</div>
           <div class="pay-method-buttons">
             <button type="button" data-method="CREDIT" class="active">💳 카드결제</button>
             <button type="button" data-method="BANK">🏦 무통장입금</button>
