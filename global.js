@@ -486,7 +486,7 @@
           </style>
       <div class="pay-guide-text">
   * 무통장입금시 주문완료후 문자 or 카카오톡으로 결제정보 보내드립니다.<br>
-  <span class="pay-guide-red">* 카드결제 수수료 6.5프로 별도입니다.</span><br>
+  <span class="pay-guide-red">* 카드결제의 경우 수수료 6.5프로 별도입니다.</span><br>
   <span class="pay-guide-blue">* 법인카드 결제시 카카오톡으로 문의바랍니다.</span><br> 
 </div>
           <div class="pay-method-buttons">
