@@ -476,13 +476,13 @@
               background:#fff; font-weight:700; cursor:pointer; font-size:16px;
             }
             .pay-method-custom button.active{ border-color:#333; background:#333; color:#fff; }
-            .pay-guide-text{ font-size:13px; color:#666; line-height:1.5; }
+            .pay-guide-text{ font-size:14px; color:#666; line-height:1.5; }
             .pay-guide-text .pay-guide-red{ color:#e60000; font-weight:700; }
             .pay-guide-text .pay-guide-blue{ color:#0066ff; font-weight:700; }
             .moved-depositor-block{ margin-top:10px; padding:10px; border:1px solid #eee; border-radius:6px; background:#fafafa; }
           </style>
       <div class="pay-guide-text">
-  <span style="color:#000000 !important; font-weight:700 !important;">* 무통장입금시 주문완료 후</span>문자 or 카카오톡으로 결제정보 보내드립니다.<br>
+  <span style="color:#000000 !important; font-weight:700 !important;">* 무통장입금시 주문완료 후</span> 문자 or 카카오톡으로 결제정보 보내드립니다.<br>
   <span class="pay-guide-red">* 카드결제 수수료 6.5프로 별도입니다.</span><br>
   <span class="pay-guide-blue">* 법인카드 결제시 카카오톡으로 문의바랍니다.</span><br> 
 </div>
