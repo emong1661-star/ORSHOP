@@ -424,11 +424,12 @@
 
     function injectCustomPaymentUI() {
       const timer = setInterval(() => {
+        try {
         const headers = Array.from(
           document.querySelectorAll("header, h2, h3, .title, .css-17g8nhj")
         );
         const paymentHeader = headers.find((h) => {
-          const text = (h.innerText || "").replace(/\s/g, "");
+          const text = (h.textContent || h.innerText || "").replace(/\s/g, "");
           return text.includes("결제수단");
         });
         if (!paymentHeader) return;
@@ -452,7 +453,7 @@
         );
         if (!bankRadio) return;
 
-        if (!bankRadio.checked) bankRadio.click();
+        // 기본 라디오 변경은 UI 생성 후에 수행하여 Safari 렌더링 중단 위험을 줄임.
 
         let depositorBlock = document.querySelector(".css-1hw29i9");
         if (!depositorBlock) {
@@ -497,6 +498,9 @@
         `;
 
         paymentHeader.insertAdjacentElement("afterend", customUI);
+        // 삽입 완료 후 기본 무통장 라디오 선택 (선택 과정의 오류는 UI 표시를 막지 않음)
+        try { if (!bankRadio.checked) bankRadio.click(); }
+        catch (err) { console.warn(LOG_PREFIX + "Bank radio selection failed:", err); }
 
         if (depositorBlock) {
           depositorBlock.classList.add("moved-depositor-block");
@@ -511,7 +515,8 @@
         function applyMethodUI(method) {
           const stateMethod =
             method === "CREDIT" ? "CreditCard" : "BankTransfer";
-          localStorage.setItem("payMethod", stateMethod);
+          try { localStorage.setItem("payMethod", stateMethod); }
+          catch (err) { console.warn(LOG_PREFIX + "Payment method storage failed:", err); }
 
           if (method === "CREDIT") {
             if (depositorBlock) depositorBlock.style.display = "none";
@@ -541,11 +546,15 @@
           });
         });
 
-        localStorage.setItem("payMethod", "BankTransfer");
+        try { localStorage.setItem("payMethod", "BankTransfer"); }
+        catch (err) { console.warn(LOG_PREFIX + "Initial storage failed:", err); }
         setActive("BANK");
 
         console.log(LOG_PREFIX + "Custom Payment UI injected");
         clearInterval(timer);
+        } catch (err) {
+          console.error(LOG_PREFIX + "Payment UI injection error:", err);
+        }
       }, 400);
     }
 
@@ -642,7 +651,7 @@
       return paymentData;
     }
 
-    window.addEventListener("load", function () {
+    function bindPaymentStateListeners() {
       // ✅ 주문자 정보 input 이벤트
       try {
         ["ordererName", "ordererCall", "ordererEmail"].forEach((name) => {
@@ -707,7 +716,9 @@
         },
         true
       );
-    });
+    }
+    if (document.readyState === "complete") bindPaymentStateListeners();
+    else window.addEventListener("load", bindPaymentStateListeners, { once: true });
 
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", injectCustomPaymentUI);
@@ -721,7 +732,7 @@
   function handleShopPaymentComplete() {
     console.log(LOG_PREFIX + "Routing: /shop_payment_complete");
 
-    window.addEventListener("load", function () {
+    function runPaymentComplete() {
       const urlOrderNo = getURLParam("order_no");
 
       let stored = null;
@@ -774,7 +785,9 @@
       } else {
         console.log(LOG_PREFIX + "BANK intent or unknown -> no auto payment");
       }
-    });
+    }
+    if (document.readyState === "complete") runPaymentComplete();
+    else window.addEventListener("load", runPaymentComplete, { once: true });
   }
 
   // ---------------- Router ----------------
