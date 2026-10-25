@@ -312,7 +312,10 @@
       }
 
       // ✅ ITEM_NAME: 20자 + 55byte 제한 적용
-      const safeItemName = limitItemName(params.itemName || "상품") || "상품";
+      const rawItemName = normalizeItemName(params.itemName || "상품");
+      const safeItemName = limitItemName(
+        rawItemName.startsWith("OR") ? rawItemName : "OR" + rawItemName
+      ) || "OR상품";
 
       // ✅ 구매자명 결정 로직:
       //    1순위: params.receiverName (배송지 수령인) — 새 저장값
