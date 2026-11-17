@@ -16,7 +16,7 @@
   // --- Domain Restriction ---
   const ALLOWED_HOSTNAMES = [
 
-    "ohrishop-officialiy.imweb.me",
+    "zcvriuum.imweb.me",
     "ohrishop3.com",
     "ohrishop2.com",
     "ohrishop4.com",
