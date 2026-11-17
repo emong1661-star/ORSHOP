@@ -20,6 +20,7 @@
     "ohrishop3.com",
     "ohrishop2.com",
     "ohrishop4.com",
+    "ohrishop5.com",
     
     "localhost",
     "127.0.0.1",
