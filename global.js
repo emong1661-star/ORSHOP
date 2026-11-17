@@ -502,9 +502,8 @@
         `;
 
         paymentHeader.insertAdjacentElement("afterend", customUI);
-        // 삽입 완료 후 기본 무통장 라디오 선택 (선택 과정의 오류는 UI 표시를 막지 않음)
-        try { if (!bankRadio.checked) bankRadio.click(); }
-        catch (err) { console.warn(LOG_PREFIX + "Bank radio selection failed:", err); }
+        // 기본 결제수단은 카드결제. 아임웹 내부 무통장 라디오는
+        // 기존 주문서 제출 호환성을 위해 변경하지 않음.
 
         if (depositorBlock) {
           depositorBlock.classList.add("moved-depositor-block");
@@ -550,9 +549,9 @@
           });
         });
 
-        try { localStorage.setItem("payMethod", "BankTransfer"); }
+        try { localStorage.setItem("payMethod", "CreditCard"); }
         catch (err) { console.warn(LOG_PREFIX + "Initial storage failed:", err); }
-        setActive("BANK");
+        setActive("CREDIT");
 
         console.log(LOG_PREFIX + "Custom Payment UI injected");
         clearInterval(timer);
@@ -619,9 +618,9 @@
           const uiState = localStorage.getItem("payMethod");
           if (uiState === "CreditCard") method = "CREDIT";
           else if (uiState === "BankTransfer") method = "BANK";
-          else method = "BANK";
+          else method = "CREDIT";
         } catch (e) {
-          method = "BANK";
+          method = "CREDIT";
         }
       }
 
